@@ -1,0 +1,5 @@
+.search {
+  display: flex;
+  width: 30vw;
+  max-width: 480px;
+}
