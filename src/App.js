@@ -7,7 +7,7 @@ import HomePage from './Components/Pages/HomePage'
 const App = (props) => (
   <Router>
     <Switch>
-      <Route  exact path='/'
+      <Route exact path='/'
               component={(routeProps) => <HomePage {...routeProps}/>}/>
     </Switch>
   </Router>
