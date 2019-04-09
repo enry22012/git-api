@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import Header from '../../Header';
 import Search from '../Search';
 import History from '../History';
 import Result from '../Result';
 import { Tabs, Tab } from 'react-bootstrap';
+import { newResponce } from '../../../js/actions';
 import './index.css';
 
 class HomePage extends Component {
   initState = {
-    history: [],
-    result: null,
     tab: 'Search'
   }
   constructor (props) {
@@ -29,20 +29,11 @@ class HomePage extends Component {
       status: res.status,
       timeStamp: timeStamp
     };
+    this.props.newResponce(request, { ...result, url: url });
     this.setState(prevState => ({
       ...prevState,
-      history: [...prevState.history, request],
-      result: { ...result, url: url },
       tab: 'Result'
     }));
-  }
-
-  setDateFormate = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return day + '/' + month + '/' + year;
   }
 
   selectTab = (event) => {
@@ -53,8 +44,6 @@ class HomePage extends Component {
 
   render() {
     const {
-      history,
-      result,
       tab
     } = this.state;
     return(
@@ -65,10 +54,10 @@ class HomePage extends Component {
             <Search search={this.search}/>
           </Tab>
           <Tab eventKey='History' title='History'>
-            <History history={history} search={this.search}/>
+            <History search={this.search}/>
           </Tab>
           <Tab eventKey='Result' title='Result'>
-            <Result result={result}/>
+            <Result/>
           </Tab>
         </Tabs>
       </div>
@@ -76,4 +65,8 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+const mapDispatchToProps = dispatch => ({
+  newResponce: (history, result) => dispatch(newResponce(history, result))
+});
+
+export default connect(null, mapDispatchToProps)(HomePage);

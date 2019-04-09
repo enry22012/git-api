@@ -1,7 +1,7 @@
-export const newResponce = (req, res) => dispatch => {
+export const newResponce = (history, result) => dispatch => {
   dispatch({
     type: 'NEW_RESPONCE',
-    req: req,
-    res: res
+    history: history,
+    result: result
   })
 }

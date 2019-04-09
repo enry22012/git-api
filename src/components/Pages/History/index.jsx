@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import './index.css'
 
@@ -43,4 +44,8 @@ class History extends Component {
   }
 }
 
-export default History;
+const mapStateToProps = state => ({
+  history: state.history
+});
+
+export default connect(mapStateToProps, null)(History);

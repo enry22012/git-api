@@ -1,14 +1,12 @@
 const initState = {
   history: [],
-  results: {}
+  result: null
 }
 
-const apiReducer = (state, action) => {
+const apiReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'SERACH_RESPONCE':
-      return state;
     case 'NEW_RESPONCE':
-      return state;
+      return { ...state, history: [...state.history, action.history], result: action.result };
     default:
       return state;
   }
